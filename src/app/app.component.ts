@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { TranslatePipe } from './translate.pipe';
+import { TranslateService } from './translate.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TranslatePipe],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-i18n';
+  private translateService = inject(TranslateService);
+
+  setLang(lang: string): void {
+    this.translateService.use(lang);
+  }
 }
